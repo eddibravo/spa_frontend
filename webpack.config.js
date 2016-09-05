@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: [
+        'whatwg-fetch',
         'webpack-dev-server/client',
         'webpack/hot/dev-server',
         './src/index'
