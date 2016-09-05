@@ -24,9 +24,10 @@ class App extends React.Component {
             .then(this.parseJSON)
             .then((data)=> {
                 this.setState({posts: data['data']})
-            } ).catch((error)=>{
-                alert('Posts ' + error)
-        })
+            } ).catch(this.errorNotify)
+    }
+    errorNotify(error){
+        alert(error)
     }
     parseJSON(response){
         return response.json()
@@ -62,9 +63,7 @@ class App extends React.Component {
             .then((data)=> {
                 this.setState({ posts: this.state.posts.concat([data['data']]) })
                 post_form_component.resetState()
-            }).catch((error)=>{
-            alert('Posts ' + error)
-        })
+            }).catch(this.errorNotify)
     }
 
 
