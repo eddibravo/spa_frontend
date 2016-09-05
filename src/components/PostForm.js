@@ -30,7 +30,12 @@ class PostForm extends React.Component {
         if(!data.title || !data.body || !data.username)
             return;
 
-        this.props.onPostSubmit(data)
+        this.props.onPostSubmit(data, this)
+    }
+    resetState(){
+        this.setState({
+            title: '', body: '', username:''
+        })
     }
 
     render(){
@@ -49,7 +54,7 @@ class PostForm extends React.Component {
                         </div>
 
                         <div className="form-group">
-                            <textarea defaultValue={this.state.body} placeholder="message body" onChange={this.handleBodyChange}/>
+                            <textarea value={this.state.body} placeholder="message body" onChange={this.handleBodyChange}/>
                         </div>
 
                         <div className="form-group">

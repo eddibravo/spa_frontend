@@ -46,7 +46,7 @@ class App extends React.Component {
         setInterval(this.fetchPosts, 5000)
     }
 
-    handlePostSubmit(new_post){
+    handlePostSubmit(new_post, post_form_component){
         return fetch(backend + '/api/posts', {
             method: 'POST',
             headers: {
@@ -61,6 +61,7 @@ class App extends React.Component {
             .then(this.parseJSON)
             .then((data)=> {
                 this.setState({ posts: this.state.posts.concat([data['data']]) })
+                post_form_component.resetState()
             }).catch((error)=>{
             alert('Posts ' + error)
         })
