@@ -31,7 +31,6 @@ class PostForm extends React.Component {
             return;
 
         this.props.onPostSubmit(data)
-        this.setState()
     }
 
     render(){
