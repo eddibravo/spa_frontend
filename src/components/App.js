@@ -20,13 +20,16 @@ class App extends React.Component {
 
     fetchPosts(){
         fetch(backend + '/api/posts')
-            .then((response)=> this.checkStatus(response))
-            .then((response)=> { return response.json() })
+            .then(this.checkStatus)
+            .then(this.parseJSON)
             .then((data)=> {
                 this.setState({posts: data['data']})
             } ).catch((error)=>{
                 alert('Posts ' + error)
         })
+    }
+    parseJSON(response){
+        return response.json()
     }
     checkStatus(response){
         if (response.status >= 200 && response.status < 300) {
@@ -54,8 +57,8 @@ class App extends React.Component {
                 post: new_post
             })
         })
-            .then((response)=> this.checkStatus(response))
-            .then((response)=> {return response.json() })
+            .then(this.checkStatus)
+            .then(this.parseJSON)
             .then((data)=> {
                 this.setState({ posts: this.state.posts.concat([data['data']]) })
             }).catch((error)=>{
