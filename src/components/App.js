@@ -1,13 +1,9 @@
 import React from 'react'
 import PostList from './PostList'
 import PostForm from './PostForm'
-// let posts = [
-//     { id: 1, name: 'lorem', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto aspernatur dolorum, inventore modi odio officia omnis quaerat quas quod quos ratione reprehenderit sed similique tempore, veritatis vitae voluptas voluptate.' },
-//     { id: 2, name: 'Ipsum' , description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda at dignissimos magnam non numquam officia officiis sit vitae? Aliquid assumenda aut harum illo, quos temporibus. Consequatur ipsum mollitia necessitatibus.' },
-//     { id: 3, name: 'Test123', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dicta dignissimos enim impedit ipsam mollitia soluta voluptatum. Debitis distinctio doloribus laboriosam, magni odit, quae quaerat quibusdam, reprehenderit unde vero voluptate?' }
-// ];
 
-const backend = 'http://localhost:3000';
+
+const backend = 'http://52.89.197.163';
 
 class App extends React.Component {
 
