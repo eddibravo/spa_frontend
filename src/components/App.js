@@ -3,8 +3,6 @@ import PostList from './PostList'
 import PostForm from './PostForm'
 
 
-const backend = 'http://52.89.197.163';
-
 class App extends React.Component {
 
     constructor(props){
@@ -15,7 +13,7 @@ class App extends React.Component {
     }
 
     fetchPosts(){
-        fetch(backend + '/api/posts')
+        fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts')
             .then(this.checkStatus)
             .then(this.parseJSON)
             .then((data)=> {
@@ -44,7 +42,7 @@ class App extends React.Component {
     }
 
     handlePostSubmit(new_post, post_form_component){
-        return fetch(backend + '/api/posts', {
+        return fetch(process.env.BACKEND_SERVER.trimRight('/') + '/api/posts', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

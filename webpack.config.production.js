@@ -2,10 +2,9 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+    devtool: 'cheap-module-source-map',
     entry: [
         'whatwg-fetch',
-        'webpack-dev-server/client',
-        'webpack/hot/dev-server',
         './src/index'
     ],
     plugins: [
@@ -13,7 +12,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production'),
-                'BACKEND_SERVER': JSON.stringify('http://localhost:4001')
+                'BACKEND_SERVER': JSON.stringify('http://52.89.197.163')
             }
         })
     ],
@@ -23,12 +22,6 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        preLoaders: [
-            {
-                test: /\.jsx?$/,
-                loader: 'eslint'
-            }
-        ],
         loaders: [
             {
                 test: /\.jsx?$/,
@@ -45,9 +38,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    eslint: {
-        failOnWarning: false,
-        failOnError: true
-    },
+    }
 };
