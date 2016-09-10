@@ -2,10 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+    devtool: 'cheap-module-source-map',
     entry: [
         'whatwg-fetch',
-        'webpack-dev-server/client',
-        'webpack/hot/dev-server',
+        'webpack-hot-middleware/client',
         './src/index'
     ],
     plugins: [

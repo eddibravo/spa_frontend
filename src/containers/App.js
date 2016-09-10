@@ -1,7 +1,9 @@
 import React from 'react'
-import PostList from './PostList'
-import PostForm from './PostForm'
-
+import PostList from '../components/PostList'
+import PostForm from '../components/PostForm'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as postActions from '../actions/PostActions'
 
 class App extends React.Component {
 
@@ -62,12 +64,26 @@ class App extends React.Component {
 
 
     render() {
+        const { addPost } = this.props.postActions
         return (
             <div>
                 <PostList posts={this.state.posts}/>
-                <PostForm onPostSubmit={this.handlePostSubmit}/>
+                <PostForm onPostSubmit={this.handlePostSubmit} onTestClick={addPost}/>
             </div>
         )
     }
 }
-export default App;
+
+function mapStateToProps(state) {
+    return {
+        post: state.posts
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        postActions: bindActionCreators(postActions, dispatch)
+    }
+
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
