@@ -29,7 +29,7 @@ class PostForm extends React.Component {
         this.props.onPostSubmit(data, this)
     }
     handleTestClick(){
-        return this.props.onTestClick()
+        return this.props.onTestClick(this.state)
     }
     resetState(){
         this.setState({
