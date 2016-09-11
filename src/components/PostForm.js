@@ -9,10 +9,6 @@ class PostForm extends React.Component {
             body: '',
             username: ''
         };
-        this.handleTitleChange = this.handleTitleChange.bind(this)
-        this.handleUsernameChange= this.handleUsernameChange.bind(this)
-        this.handleBodyChange= this.handleBodyChange.bind(this)
-        this.handleSubmit= this.handleSubmit.bind(this)
     }
 
     handleTitleChange(event){
@@ -32,6 +28,9 @@ class PostForm extends React.Component {
 
         this.props.onPostSubmit(data, this)
     }
+    handleTestClick(){
+        return this.props.onTestClick(this.state)
+    }
     resetState(){
         this.setState({
             title: '', body: '', username:''
@@ -44,21 +43,22 @@ class PostForm extends React.Component {
                 <fieldset>
                     <legend>Добавление новости</legend>
 
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={::this.handleSubmit}>
                         <div className="form-group">
-                            <input type="text" placeholder="your name" value={this.state.username} onChange={this.handleUsernameChange}/>
+                            <input type="text" placeholder="your name" value={this.state.username} onChange={::this.handleUsernameChange}/>
                         </div>
 
                         <div className="form-group">
-                            <input type="text" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/>
+                            <input type="text" placeholder="title" value={this.state.title} onChange={::this.handleTitleChange}/>
                         </div>
 
                         <div className="form-group">
-                            <textarea value={this.state.body} placeholder="message body" onChange={this.handleBodyChange}/>
+                            <textarea value={this.state.body} placeholder="message body" onChange={::this.handleBodyChange}/>
                         </div>
 
                         <div className="form-group">
                             <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="button" className="btn btn-info" onClick={::this.handleTestClick}>Test</button>
                         </div>
                     </form>
                 </fieldset>

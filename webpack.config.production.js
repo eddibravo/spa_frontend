@@ -5,7 +5,6 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: [
         'whatwg-fetch',
-        'webpack-hot-middleware/client',
         './src/index'
     ],
     plugins: [
@@ -13,7 +12,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production'),
-                'BACKEND_SERVER': JSON.stringify('http://localhost:4001')
+                'BACKEND_SERVER': JSON.stringify('http://52.89.197.163')
             }
         })
     ],
@@ -23,18 +22,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        preLoaders: [
-            {
-                test: /\.jsx?$/,
-                loader: 'eslint'
-            }
-        ],
         loaders: [
-            {
-                test: /\.jsx?$/,
-                loader: 'react-hot',
-                include: path.resolve(__dirname, 'src')
-            },
             {
                 loader: 'babel-loader',
                 test: /\.jsx?$/,
@@ -45,9 +33,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    eslint: {
-        failOnWarning: false,
-        failOnError: true
-    },
+    }
 };

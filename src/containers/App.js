@@ -1,9 +1,9 @@
 import React from 'react'
-import PostList from './PostList'
-import PostForm from './PostForm'
-
-
-const backend = 'http://52.89.197.163';
+import PostList from '../components/PostList'
+import PostForm from '../components/PostForm'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as postActions from '../actions/PostActions'
 
 class App extends React.Component {
 
@@ -15,7 +15,7 @@ class App extends React.Component {
     }
 
     fetchPosts(){
-        fetch(backend + '/api/posts')
+        fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts')
             .then(this.checkStatus)
             .then(this.parseJSON)
             .then((data)=> {
@@ -44,7 +44,7 @@ class App extends React.Component {
     }
 
     handlePostSubmit(new_post, post_form_component){
-        return fetch(backend + '/api/posts', {
+        return fetch(process.env.BACKEND_SERVER.trimRight('/') + '/api/posts', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -64,12 +64,26 @@ class App extends React.Component {
 
 
     render() {
+        const { addPost } = this.props.postActions
         return (
             <div>
                 <PostList posts={this.state.posts}/>
-                <PostForm onPostSubmit={this.handlePostSubmit}/>
+                <PostForm onPostSubmit={this.handlePostSubmit} onTestClick={addPost}/>
             </div>
         )
     }
 }
-export default App;
+
+function mapStateToProps(state) {
+    return {
+        post: state.posts
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        postActions: bindActionCreators(postActions, dispatch)
+    }
+
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
