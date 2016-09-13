@@ -13,7 +13,7 @@ class PostFormView extends React.Component {
         if(!this._title.value.trim() || !this._body.value.trim() || !this._username.value.trim())
             return;
         onPostSubmit( { title: this._title.value.trim(), body: this._body.value.trim(), username: this._username.value.trim()} )
-        this._title.value = '';  this._body.value = ''; this._username.value = '' // и всё же как "правильно" чистить форму - так и не понял (
+        this._form.reset()
     }
 
     render(){
@@ -23,7 +23,7 @@ class PostFormView extends React.Component {
                 <fieldset>
                     <legend>Добавление новости</legend>
 
-                    <form onSubmit={::this.handleSubmit}>
+                    <form onSubmit={::this.handleSubmit} ref={(node) => {this._form = node}}>
                         <div className="form-group">
                             <input type="text" placeholder="your name" ref={(node) => {this._username = node}}  />
                         </div>

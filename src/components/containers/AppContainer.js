@@ -1,6 +1,6 @@
 import React from 'react'
 import PostsView from '../views/PostsView'
-import PostFormView from '../views/PostFormView' // Название класса/имя файла не меняю, т.к. начнем если строгать контейнеры, то я буду путаться где компоненты-представления а где компоненты-контейнеры
+import PostFormView from '../views/PostFormView'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as postActions from '../../actions/PostActions'
