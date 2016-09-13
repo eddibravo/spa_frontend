@@ -1,6 +1,6 @@
 import React from 'react'
 
-class PostForm extends React.Component {
+class PostFormView extends React.Component {
     static propTypes = {
         adding_new_post: React.PropTypes.bool.isRequired,
         onPostSubmit: React.PropTypes.func.isRequired
@@ -8,7 +8,7 @@ class PostForm extends React.Component {
 
     render(){
         let new_username, new_body, new_title
-        const { adding_new_post, onPostSubmit, error } = this.props
+        const { adding_new_post, onPostSubmit } = this.props
         return (
             <div>
                 <fieldset>
@@ -41,7 +41,6 @@ class PostForm extends React.Component {
 
                         <div className="form-group">
                             <button type="submit" className="btn btn-primary" disabled={adding_new_post}>Submit</button>
-                            { error ? '' : error}
                         </div>
                     </form>
                 </fieldset>
@@ -51,4 +50,4 @@ class PostForm extends React.Component {
     }
 }
 
-export default PostForm;
+export default PostFormView;
