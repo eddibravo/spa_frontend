@@ -6,17 +6,15 @@ import { ADD_POST_REQUEST ,
     REMOVE_POST_SUCCESS} from '../constants/post'
 import { BACKEND_URL_POSTS } from '../constants/general'
 
-function paramsToPostRequest(method='POST', params={})
+function paramsToPostRequest(options={})
 {
     return {
-        method: method,
+        method: options.method || 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            post: params
-        })
+        body: options.body ?  JSON.stringify(options.body) : null
     }
 }
 
@@ -41,13 +39,13 @@ export function addPost(new_post) {
             payload: new_post
         })
 
-        fetch(BACKEND_URL_POSTS, paramsToPostRequest('POST', new_post))
+        fetch(BACKEND_URL_POSTS, paramsToPostRequest({body: {post: new_post}}))
             .then(checkResponseStatus)
             .then(parseJSON)
             .then((data)=> {
                 dispatch({
                     type: ADD_POST_SUCCESS,
-                    payload: data['data']
+                    payload: data
                 })
             }).catch((e) => {
             alert(e)
@@ -68,9 +66,7 @@ export function fetchPosts() {
             .then((data)=> {
                 dispatch({
                     type: FETCH_POSTS_SUCCESS,
-                    payload: data['data'].map((t) => {
-                        return {id: t['id'], title: t['attributes']['title'], body: t['attributes']['body'], username: t['attributes']['username']};
-                    })
+                    payload: data
                 })
             } ).catch((e) => {
                 alert(e) // ошибки пока просто алертим, ибо я не уверен что у нас останутся эти функции fetch, а как обрабатывать ошибки это отдельная история.
@@ -83,7 +79,7 @@ export function removePost(post) {
             type: REMOVE_POST_REQUEST,
             payload: post
         })
-        fetch(`${BACKEND_URL_POSTS}/${post.id}`, paramsToPostRequest('DELETE'))
+        fetch(`${BACKEND_URL_POSTS}/${post.id}`, paramsToPostRequest({method: 'DELETE'}))
             .then(checkResponseStatus)
             .then(()=> {
                 dispatch({

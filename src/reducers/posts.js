@@ -26,8 +26,7 @@ export default function posts(state=initialState, action) {
         case ADD_POST_REQUEST:
             return {...state, adding_new_post: true }
         case ADD_POST_SUCCESS:
-            var attr = action.payload.attributes
-            return {...state, adding_new_post: false, items: state.items.concat({ id: action.payload.id, title: attr.title, body: attr.body, username: attr.username}) }
+            return {...state, adding_new_post: false, items: state.items.concat({ id: action.payload.id, title: action.payload.title, body: action.payload.body, username: action.payload.username}) }
         default:
             return state
     }
