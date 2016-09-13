@@ -1,0 +1,1 @@
+export const BACKEND_URL_POSTS = process.env.BACKEND_SERVER.trimRight('/') + '/api/posts'

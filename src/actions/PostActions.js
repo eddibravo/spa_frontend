@@ -4,6 +4,7 @@ import { ADD_POST_REQUEST ,
     FETCH_POSTS_SUCCESS,
     REMOVE_POST_REQUEST,
     REMOVE_POST_SUCCESS} from '../constants/post'
+import { BACKEND_URL_POSTS } from '../constants/general'
 
 function paramsToPostRequest(method='POST', params={})
 {
@@ -40,7 +41,7 @@ export function addPost(new_post) {
             payload: new_post
         })
 
-        fetch(process.env.BACKEND_SERVER.trimRight('/') + '/api/posts', paramsToPostRequest('POST', new_post))
+        fetch(BACKEND_URL_POSTS, paramsToPostRequest('POST', new_post))
             .then(checkResponseStatus)
             .then(parseJSON)
             .then((data)=> {
@@ -61,7 +62,7 @@ export function fetchPosts() {
             payload: null
         })
 
-        fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts')
+        fetch(BACKEND_URL_POSTS)
             .then(checkResponseStatus)
             .then(parseJSON)
             .then((data)=> {
@@ -82,7 +83,7 @@ export function removePost(post) {
             type: REMOVE_POST_REQUEST,
             payload: post
         })
-        fetch(process.env.BACKEND_SERVER.trimRight('/') + '/api/posts/'+post.id, paramsToPostRequest('DELETE'))
+        fetch(`${BACKEND_URL_POSTS}/${post.id}`, paramsToPostRequest('DELETE'))
             .then(checkResponseStatus)
             .then(()=> {
                 dispatch({
