@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     entry: [
         'whatwg-fetch',
         './src/index'
@@ -11,8 +11,9 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify('production'),
-                'BACKEND_SERVER': JSON.stringify('http://52.89.197.163')
+                NODE_ENV: JSON.stringify('production'),
+                __DEVELOPMENT__: false,
+                BACKEND_SERVER: JSON.stringify('http://52.89.197.163')
             }
         })
     ],

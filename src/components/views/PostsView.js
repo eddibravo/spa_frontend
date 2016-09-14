@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router'
 class PostsView extends React.Component {
     static propTypes={
         posts: React.PropTypes.arrayOf(
@@ -11,8 +11,7 @@ class PostsView extends React.Component {
             }).isRequired
         ).isRequired,
         fetching_posts: React.PropTypes.bool.isRequired,
-        reloadPosts: React.PropTypes.func.isRequired,
-        removePost: React.PropTypes.func.isRequired
+        reloadPosts: React.PropTypes.func.isRequired
     };
 
 
@@ -27,7 +26,7 @@ class PostsView extends React.Component {
         return (
             <li className="post-item" key={key}>
                 <h3>
-                    { item.title } [<small style={{ color: 'red', cursor: 'pointer', textDecoration: 'underline' }} onClick={::this.handleDelete.bind(this, item)}>del</small>]
+                    <Link to={`/posts/${item.id}`}>{ item.title }</Link> [<small style={{ color: 'red', cursor: 'pointer', textDecoration: 'underline' }} onClick={::this.handleDelete.bind(this, item)}>del</small>]
                     <p>{ item.username }</p>
                 </h3>
                 <div className="post-content">{ item.body }</div>
@@ -43,6 +42,7 @@ class PostsView extends React.Component {
                     {posts.map((item, key) => ::this.renderItem(item, key) )}
                 </ul>
                 { fetching_posts ? 'loading...' : <span style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={reloadPosts}>reload posts</span> }
+
             </div>
         )
     }
