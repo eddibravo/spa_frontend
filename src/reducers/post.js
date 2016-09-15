@@ -14,7 +14,7 @@ export default function post(state=initialState, action) {
     switch(action.type)
     {
         case FETCH_POST_REQUEST:{
-            return{...state, fetching: true}
+            return{...initialState, fetching: true}
         }
         case FETCH_POST_SUCCESS:{
             return{...state, fetching: false, ...action.payload}

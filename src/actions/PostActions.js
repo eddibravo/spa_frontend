@@ -6,7 +6,6 @@ import { ADD_POST_SUCCESS,
     FETCH_POST_REQUEST,
     FETCH_POST_SUCCESS } from '../constants/post'
 import { BACKEND_URL_POSTS } from '../constants/general'
-
 function paramsToPostRequest(options={})
 {
     return {
