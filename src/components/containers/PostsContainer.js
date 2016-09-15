@@ -13,13 +13,13 @@ class PostsContainer extends React.Component{
     }
 
     render(){
-        const {adding_new_post, error, fetching_posts, items} = this.props.posts
+        const {error, fetching_posts, items} = this.props.posts
         const { addPost, removePost, fetchPosts } = this.props.postActions
 
         return(
             <div>
                 <PostsView removePost={removePost} posts={items} fetching_posts={fetching_posts} reloadPosts={fetchPosts} />
-                <PostFormView onPostSubmit={addPost} adding_new_post={adding_new_post} error={error} key='new_post'/>
+                <PostFormView onPostSubmit={addPost} error={error} key='new_post'/>
             </div>
         )
     }

@@ -1,5 +1,4 @@
-import { ADD_POST_REQUEST ,
-    ADD_POST_SUCCESS,
+import { ADD_POST_SUCCESS,
     FETCH_POSTS_REQUEST,
     FETCH_POSTS_SUCCESS,
     REMOVE_POST_REQUEST,
@@ -36,10 +35,6 @@ function parseJSON(response) {
 
 export function addPost(new_post) {
     return(dispatch) => {
-        dispatch({
-            type: ADD_POST_REQUEST,
-            payload: new_post
-        })
 
         fetch(BACKEND_URL_POSTS, paramsToPostRequest({body: {post: new_post}}))
             .then(checkResponseStatus)

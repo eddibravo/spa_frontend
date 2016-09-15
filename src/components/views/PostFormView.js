@@ -2,7 +2,6 @@ import React from 'react'
 
 class PostFormView extends React.Component {
     static propTypes = {
-        adding_new_post: React.PropTypes.bool.isRequired,
         onPostSubmit: React.PropTypes.func.isRequired
     }
 
@@ -10,14 +9,19 @@ class PostFormView extends React.Component {
         const { onPostSubmit  } = this.props
         event.preventDefault();
 
-        if(!this._title.value.trim() || !this._body.value.trim() || !this._username.value.trim())
-            return;
         onPostSubmit( { title: this._title.value.trim(), body: this._body.value.trim(), username: this._username.value.trim()} )
         this._form.reset()
+        this._submit_button.disabled = true
+    }
+    handleChangeInput(){
+        this._submit_button.disabled = !(this._title.value.trim() && this._body.value.trim() && this._username.value.trim())
+    }
+
+    componentDidMount(){
+        this._submit_button.disabled = true
     }
 
     render(){
-        const { adding_new_post } = this.props
         return (
             <div>
                 <fieldset>
@@ -25,19 +29,19 @@ class PostFormView extends React.Component {
 
                     <form onSubmit={::this.handleSubmit} ref={(node) => {this._form = node}}>
                         <div className="form-group">
-                            <input type="text" placeholder="your name" ref={(node) => {this._username = node}}  />
+                            <input type="text" placeholder="your name" ref={(node) => {this._username = node}} onChange={::this.handleChangeInput} />
                         </div>
 
                         <div className="form-group">
-                            <input type="text" placeholder="title" ref={(node) => {this._title = node}} />
+                            <input type="text" placeholder="title" ref={(node) => {this._title = node}}  onChange={::this.handleChangeInput} />
                         </div>
 
                         <div className="form-group">
-                            <textarea placeholder="message body" ref={(node) => {this._body = node}} />
+                            <textarea placeholder="message body" ref={(node) => {this._body = node}}  onChange={::this.handleChangeInput} />
                         </div>
 
                         <div className="form-group">
-                            <button type="submit" className="btn btn-primary" disabled={adding_new_post}>Submit</button>
+                            <button type="submit" className="btn btn-primary" ref={(node) => this._submit_button = node}>Submit</button>
                         </div>
                     </form>
                 </fieldset>
