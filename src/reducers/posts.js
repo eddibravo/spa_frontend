@@ -1,5 +1,4 @@
-import { ADD_POST_REQUEST,
-    ADD_POST_SUCCESS,
+import { ADD_POST_SUCCESS,
     FETCH_POSTS_SUCCESS,
     REMOVE_POST_SUCCESS,
     REMOVE_POST_REQUEST,
@@ -26,9 +25,6 @@ export default function posts(state=initialState, action) {
         }
         case FETCH_POSTS_SUCCESS:{
             return{...state, fetching_posts: false, items: action.payload}
-        }
-        case ADD_POST_REQUEST:{
-            return {...state, adding_new_post: true }
         }
         case ADD_POST_SUCCESS:{
             const { id, title, username, body } = action.payload

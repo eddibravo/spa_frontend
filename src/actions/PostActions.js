@@ -1,11 +1,11 @@
-import { ADD_POST_REQUEST ,
-    ADD_POST_SUCCESS,
+import { ADD_POST_SUCCESS,
     FETCH_POSTS_REQUEST,
     FETCH_POSTS_SUCCESS,
     REMOVE_POST_REQUEST,
-    REMOVE_POST_SUCCESS} from '../constants/post'
+    REMOVE_POST_SUCCESS,
+    FETCH_POST_REQUEST,
+    FETCH_POST_SUCCESS } from '../constants/post'
 import { BACKEND_URL_POSTS } from '../constants/general'
-
 function paramsToPostRequest(options={})
 {
     return {
@@ -34,10 +34,6 @@ function parseJSON(response) {
 
 export function addPost(new_post) {
     return(dispatch) => {
-        dispatch({
-            type: ADD_POST_REQUEST,
-            payload: new_post
-        })
 
         fetch(BACKEND_URL_POSTS, paramsToPostRequest({body: {post: new_post}}))
             .then(checkResponseStatus)
@@ -70,6 +66,27 @@ export function fetchPosts() {
                 })
             } ).catch((e) => {
                 alert(e) // ошибки пока просто алертим, ибо я не уверен что у нас останутся эти функции fetch, а как обрабатывать ошибки это отдельная история.
+        })
+    }
+}
+
+export function fetchPost(id){
+    return(dispatch) => {
+        dispatch({
+            type: FETCH_POST_REQUEST,
+            payload: id
+        })
+
+        fetch(`${BACKEND_URL_POSTS}/${id}`)
+            .then(checkResponseStatus)
+            .then(parseJSON)
+            .then((data)=> {
+                dispatch({
+                    type: FETCH_POST_SUCCESS,
+                    payload: data
+                })
+            } ).catch((e) => {
+            alert(e)
         })
     }
 }
