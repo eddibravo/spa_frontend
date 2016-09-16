@@ -15,7 +15,7 @@ class PostContainer extends React.Component{
         const { post } = this.props
 
         return(
-            <PostView body={post.body} title={post.title} username={post.username}  created_at={post.created_at} fetching={post.fetching}/>
+            <PostView post={post}/>
         )
     }
 }

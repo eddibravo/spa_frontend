@@ -2,14 +2,17 @@ import React from 'react'
 
 class PostView extends React.Component {
     static propTypes = {
-        // id: React.PropTypes.number.isRequired,
-        username: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string.isRequired,
-        body: React.PropTypes.string.isRequired,
-        created_at: React.PropTypes.string.isRequired
+        post: React.PropTypes.shape({
+            // id: React.PropTypes.number.isRequired,
+            username: React.PropTypes.string.isRequired,
+            title: React.PropTypes.string.isRequired,
+            body: React.PropTypes.string.isRequired,
+            created_at: React.PropTypes.string.isRequired
+        }).isRequired
+
     }
     render(){
-        const { fetching, username, title, body, created_at } = this.props
+        const { fetching, username, title, body, created_at } = this.props.post
         const post = (<div>
             <h3>
                 { title }
