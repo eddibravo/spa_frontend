@@ -23,7 +23,8 @@ class PostContainer extends React.Component{
 
 function mapStateToProps(state) {
     return {
-        post: state.post
+        post: state.post,
+        auth: state.auth
     }
 }
 

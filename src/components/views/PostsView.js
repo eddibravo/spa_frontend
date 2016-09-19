@@ -2,12 +2,16 @@ import React from 'react'
 import { Link } from 'react-router'
 class PostsView extends React.Component {
     static propTypes={
+        auth: React.PropTypes.object.isRequired,
         posts: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 id: React.PropTypes.number.isRequired,
                 title: React.PropTypes.string.isRequired,
-                username: React.PropTypes.string.isRequired,
-                body: React.PropTypes.string.isRequired
+                body: React.PropTypes.string.isRequired,
+                user: React.PropTypes.shape({
+                    id: React.PropTypes.number.isRequired,
+                    username: React.PropTypes.string.isRequired
+                }).isRequired
             }).isRequired
         ).isRequired,
         fetching_posts: React.PropTypes.bool.isRequired,
@@ -23,11 +27,17 @@ class PostsView extends React.Component {
         }
     }
     renderItem(item, key){
+        const { auth } = this.props
         return (
             <li className="post-item" key={key}>
                 <h3>
-                    <Link to={`/posts/${item.id}`}>{ item.title }</Link> [<small style={{ color: 'red', cursor: 'pointer', textDecoration: 'underline' }} onClick={::this.handleDelete.bind(this, item)}>del</small>]
-                    <p>{ item.username }</p>
+                    <Link to={`/posts/${item.id}`}>{ item.title }</Link>
+                    {
+                        auth.isAuthenticated && auth.user.id === item.user.id?
+                            (<button onClick={::this.handleDelete.bind(this, item)}>delete</button>)
+                            : ''
+                    }
+                    <p style={{ marginTop:'-2px', fontSize: '80%', color:'gray', fontWeight: 'normal' }}>posted by: { item.user.username }</p>
                 </h3>
                 <div className="post-content">{ item.body }</div>
             </li>
@@ -39,9 +49,17 @@ class PostsView extends React.Component {
         return (
             <div>
                 <ul className="post-items">
-                    {posts.map((item, key) => ::this.renderItem(item, key) )}
+                    {
+                        posts.length > 0 ?
+                            posts.map((item, key) => ::this.renderItem(item, key) )
+                            : 'Тут будут отображаться новости'
+                    }
                 </ul>
-                { fetching_posts ? 'loading...' : <span style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={reloadPosts}>reload posts</span> }
+                {
+                    fetching_posts ?
+                        'loading...'
+                        : <span style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={reloadPosts}>reload posts</span>
+                }
 
             </div>
         )
