@@ -4,7 +4,7 @@ import { Router } from 'react-router'
 
 import AppContainer from './AppContainer';
 import PostsContainer from './PostsContainer'
-import NotFoundView from '../views/NotFoundView'
+import NotFoundView from '../views/not_found'
 import SignInContainer from './SignInContainer'
 import PostContainer from './PostContainer'
 import { Route , IndexRoute} from 'react-router'

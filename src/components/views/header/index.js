@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-class HeaderView extends React.Component{
+class Header extends React.Component{
     static propTypes = {
         signOut: React.PropTypes.func.isRequired,
         auth: React.PropTypes.object.isRequired
@@ -26,4 +26,4 @@ class HeaderView extends React.Component{
     }
 }
 
-export default HeaderView
+export default Header

@@ -1,6 +1,6 @@
 import React from 'react'
 
-class PostFormView extends React.Component {
+class PostForm extends React.Component {
     static propTypes = {
         onPostSubmit: React.PropTypes.func.isRequired
     }
@@ -47,4 +47,4 @@ class PostFormView extends React.Component {
     }
 }
 
-export default PostFormView;
+export default PostForm;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-class PostsView extends React.Component {
+class Posts extends React.Component {
     static propTypes={
         auth: React.PropTypes.object.isRequired,
         posts: React.PropTypes.arrayOf(
@@ -66,4 +66,4 @@ class PostsView extends React.Component {
     }
 }
 
-export default PostsView;
+export default Posts;

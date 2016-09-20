@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderView from '../views/HeaderView'
+import HeaderView from '../views/header'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as authActions from '../../actions/AuthActions'

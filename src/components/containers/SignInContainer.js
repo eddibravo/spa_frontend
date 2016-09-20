@@ -1,5 +1,5 @@
 import React from 'react'
-import SignInView from '../views/SignInView'
+import SignInView from '../views/sign_in'
 import { connect } from 'react-redux'
 import * as authActions from '../../actions/AuthActions'
 import { bindActionCreators } from 'redux'

@@ -1,5 +1,5 @@
 import React from 'react'
-import PostView from '../views/PostView'
+import PostView from '../views/posts/post'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

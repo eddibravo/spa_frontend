@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-class SignInView extends React.Component{
+class SignIn extends React.Component{
     static propTypes = {
         onSubmit: React.PropTypes.func.isRequired,
         auth: React.PropTypes.shape({
@@ -30,6 +30,7 @@ class SignInView extends React.Component{
         this.props.onSubmit(user_data)
         this._form.reset()
         this.disableSubmitButton()
+        this._username.focus()
     }
 
     render(){
@@ -52,4 +53,4 @@ class SignInView extends React.Component{
     }
 }
 
-export default SignInView
+export default SignIn
