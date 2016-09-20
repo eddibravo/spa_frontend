@@ -4,7 +4,7 @@ import { Router } from 'react-router'
 
 import AppContainer from './AppContainer';
 import PostsContainer from './PostsContainer'
-import NotFoundView from '../views/not_found'
+import NotFound from '../views/not_found'
 import SignInContainer from './SignInContainer'
 import PostContainer from './PostContainer'
 import { Route , IndexRoute} from 'react-router'
@@ -21,7 +21,7 @@ class RSRouter extends React.Component {
                     <Route path="/sign_in" component={SignInContainer} onEnter={::this.onlyForNotSignedIn} />
                     <Route path='/posts/:id' component={PostContainer}/>
                 </Route>
-                <Route path='*' component={NotFoundView} />
+                <Route path='*' component={NotFound} />
             </div>
         )
     }

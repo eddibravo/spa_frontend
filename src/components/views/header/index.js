@@ -18,7 +18,8 @@ class Header extends React.Component{
                             welcome <strong>{ user.username }</strong> <button type="button" onClick={signOut}>Выйти</button>
                         </div>
                         :
-                        <Link to="/sign_in">Войти</Link> }
+                        <Link to="/sign_in">Войти</Link>
+                }
 
                 <hr />
             </div>

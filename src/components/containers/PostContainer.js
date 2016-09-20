@@ -1,5 +1,5 @@
 import React from 'react'
-import PostView from '../views/posts/post'
+import Post from '../views/posts/post'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -15,7 +15,7 @@ class PostContainer extends React.Component{
         const { post } = this.props
 
         return(
-            <PostView post={post}/>
+            <Post post={post}/>
         )
     }
 }

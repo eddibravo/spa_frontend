@@ -1,5 +1,5 @@
 import React from 'react'
-import SignInView from '../views/sign_in'
+import SignIn from '../views/sign_in'
 import { connect } from 'react-redux'
 import * as authActions from '../../actions/AuthActions'
 import { bindActionCreators } from 'redux'
@@ -11,7 +11,7 @@ class SignInContainer extends React.Component{
         const { signIn } = this.props.authActions
 
         return(
-            <SignInView onSubmit={signIn} auth={auth}/>
+            <SignIn onSubmit={signIn} auth={auth}/>
         )
     }
 }
