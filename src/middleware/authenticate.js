@@ -1,12 +1,11 @@
 import jwtDecode from 'jwt-decode'
-import { JWT_TOKEN } from '../constants/general'
-import { loginSuccess, logout } from '../actions/AuthActions'
+import { loginSuccess, logout, getToken } from '../actions/AuthActions'
 
 export const authenticate = store => next => action => {
 
     let nextAction = next(action)
-    let auth = store.getState().auth
-    let jwt = localStorage.getItem(JWT_TOKEN) || null
+    const { auth } = store.getState()
+    let jwt = getToken()
     if(!jwt)
     {
         if(auth.isAuthenticated) // если ключа в localStore нет, но юзер числится как авторизованный
@@ -17,7 +16,7 @@ export const authenticate = store => next => action => {
     try{
         let decode = jwtDecode(jwt)
 
-        if(auth.isAuthenticated && decode.exp < parseInt(Date.now()/1000)){ // юзер авторизован, и истек срок действия ключа
+        if(auth.isAuthenticated && decode.exp < parseInt(Date.now()/1000)){ // юзер авторизован, и истек срок действия ключа. Тут не понятно как быть с часовыми поясами сервера и посетителя?
             store.dispatch(logout())
         }else if(!auth.isAuthenticated){ // авторизуем юзера если всё ок.
             store.dispatch(loginSuccess({jwt_token: jwt, user: decode}))

@@ -9,8 +9,8 @@ class SignInContainer extends React.Component{
     render(){
         const { auth } = this.props
         const { signIn } = this.props.authActions
-        return(
 
+        return(
             <SignInView onSubmit={signIn} auth={auth}/>
         )
     }

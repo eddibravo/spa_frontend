@@ -10,9 +10,21 @@ function loginRequest(user_data) {
         payload: user_data
     }
 }
+export function getToken() {
+    return localStorage.getItem(JWT_TOKEN) || null
+}
+
+export function removeToken() {
+    localStorage.removeItem(JWT_TOKEN);
+}
+
+export function setToken(token) {
+    localStorage.setItem(JWT_TOKEN, token);
+}
+
 
 export function loginSuccess(payload) {
-    localStorage.setItem(JWT_TOKEN, payload.jwt_token);
+    setToken(payload.jwt_token)
     return{
         type: auth_c.SIGN_IN_SUCCESS,
         payload: payload
@@ -20,7 +32,7 @@ export function loginSuccess(payload) {
 }
 
 export function logout() {
-    localStorage.removeItem(JWT_TOKEN);
+    removeToken()
     return{
         type: auth_c.SIGN_OUT,
         payload: null
@@ -35,7 +47,7 @@ export function logoutAndRedirect() {
 }
 
 function loginFailure(error) {
-    localStorage.removeItem(JWT_TOKEN)
+    removeToken()
     return {
         type: auth_c.SIGN_IN_FAIL,
         payload: {

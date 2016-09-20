@@ -29,6 +29,7 @@ class SignInView extends React.Component{
         }
         this.props.onSubmit(user_data)
         this._form.reset()
+        this.disableSubmitButton()
     }
 
     render(){

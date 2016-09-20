@@ -11,7 +11,7 @@ const configureStore = (initialState) => {
     const store = createStore(
         rootReducer,
         initialState,
-        applyMiddleware(thunk, logger, routerMiddleware(browserHistory), authenticate)
+        applyMiddleware(thunk, logger, authenticate, routerMiddleware(browserHistory))
     )
 
     if (module.hot) {
