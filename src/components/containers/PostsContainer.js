@@ -1,6 +1,6 @@
 import React from 'react'
-import PostsView from '../views/PostsView'
-import PostFormView from '../views/PostFormView'
+import Posts from '../views/posts'
+import PostForm from '../views/posts/form'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -13,13 +13,14 @@ class PostsContainer extends React.Component{
     }
 
     render(){
-        const {error, fetching_posts, items} = this.props.posts
+        const { posts, auth } = this.props
+        const { error, fetching_posts, items } = posts
         const { addPost, removePost, fetchPosts } = this.props.postActions
 
         return(
             <div>
-                <PostsView removePost={removePost} posts={items} fetching_posts={fetching_posts} reloadPosts={fetchPosts} />
-                <PostFormView onPostSubmit={addPost} error={error} key='new_post'/>
+                <Posts removePost={removePost} auth={auth} posts={items} fetching_posts={fetching_posts} reloadPosts={fetchPosts} />
+                { auth.isAuthenticated ? <PostForm onPostSubmit={addPost} error={error} key='new_post'/> : ''}
             </div>
         )
     }
@@ -28,7 +29,8 @@ class PostsContainer extends React.Component{
 
 function mapStateToProps(state) {
     return {
-        posts: state.posts
+        posts: state.posts,
+        auth: state.auth
     }
 }
 

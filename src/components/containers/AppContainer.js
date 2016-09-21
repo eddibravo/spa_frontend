@@ -1,13 +1,17 @@
 import React from 'react'
-import HeaderView from '../views/HeaderView'
+import Header from '../views/header'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as authActions from '../../actions/AuthActions'
 
 class AppContainer extends React.Component {
 
     render() {
+        const { auth } = this.props
+        const { logoutAndRedirect } = this.props.authActions
         return (
             <div>
-                <HeaderView/>
+                <Header auth={auth} signOut={logoutAndRedirect}/>
                 <main style={{padding: '15px'}}>
                     { this.props.children }
                 </main>
@@ -15,5 +19,18 @@ class AppContainer extends React.Component {
         )
     }
 }
+function mapStateToProps(state) {
+    return{
+        auth: state.auth
+    }
+}
 
-export default connect()(AppContainer);
+
+function mapDispatchToProps(dispatch) {
+    return {
+        authActions: bindActionCreators(authActions, dispatch)
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

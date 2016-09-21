@@ -1,6 +1,6 @@
 import React from 'react'
 
-class PostView extends React.Component {
+class Post extends React.Component {
     static propTypes = {
         post: React.PropTypes.shape({
             // id: React.PropTypes.number.isRequired,
@@ -29,4 +29,4 @@ class PostView extends React.Component {
     }
 }
 
-export default PostView
+export default Post
